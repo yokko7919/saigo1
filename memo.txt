@@ -1,0 +1,6 @@
+APIキー
+dce70cc7-e081-4f3c-9c1c-1647161b9673
+シークレットID
+gmNoiOrdFmNa6oWQngmsJm3ptFo2guH3
+利用可能ドメイン
+yokko7919.github.io
