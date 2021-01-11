@@ -80,3 +80,63 @@ image {
     color: #fff;
     border-radius: 10px;
 }
+
+/*ルーム部屋*/
+.roomlog{/*ルーム名を表示するところを消した*/
+    display: none;
+}
+
+/*skyway回し*/
+/* normalize */
+body {
+    margin: 0;
+  }
+  
+  /* global styles */
+  video {
+    background-color: #111;
+    width: 100%;
+  }
+  
+  .heading {
+    text-align: center;
+    margin-bottom: 0;
+  }
+  
+  .note {
+    text-align: center;
+  }
+  
+  .meta {
+    text-align: center;
+    font-size: 0.8rem;
+    color: gray;
+  }
+  
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+  }
+
+/* room */
+.room {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    gap: 8px;
+    margin: 0 8px;
+  }
+  
+  .room .remote-streams {
+    height: 97%;
+    background-color: #4bf39fa6;
+  }
+  
+  .room .messages {
+    background-color: rgba(37, 186, 197, 0.219);
+    min-height: 100px;
+    min-width: 25rem;
+    padding: 8px;
+    margin-top: 0;
+  }
+  

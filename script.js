@@ -5,22 +5,17 @@ const Peer = window.Peer;
   const joinTrigger = document.getElementById('js-join-trigger');
   const leaveTrigger = document.getElementById('js-leave-trigger');
   const remoteVideos = document.getElementById('js-remote-streams');
-  const roomId = document.getElementById('js-room-id');
+  const roomId = document.getElementById('js-room-id');//悩む
+  //const roomId = '趣味' ;
   const roomMode = document.getElementById('js-room-mode');
   const localText = document.getElementById('js-local-text');
   const sendTrigger = document.getElementById('js-send-trigger');
   const messages = document.getElementById('js-messages');
-  const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
 
-  meta.innerText = `
-    UA: ${navigator.userAgent}
-    SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
-  `.trim();
-
+//サーバにどう繋げるかの選択肢のやつ　表示上消しただけ
   const getRoomModeByHash = () => (location.hash === '#sfu' ? 'sfu' : 'mesh');
-
-  roomMode.textContent = getRoomModeByHash();
+  //roomMode.textContent = getRoomModeByHash(); 消しただけ
   window.addEventListener(
     'hashchange',
     () => (roomMode.textContent = getRoomModeByHash())
@@ -33,19 +28,20 @@ const Peer = window.Peer;
     })
     .catch(console.error);
 
-  // ローカルのストリームをレンダリングする
+// ローカルのストリームをレンダリングする
   localVideo.muted = true;
   localVideo.srcObject = localStream;
   localVideo.playsInline = true;
   await localVideo.play().catch(console.error);
 
-  // eslint-disable-next-line require-atomic-updates
+  // Skywayのキー
   const peer = (window.peer = new Peer({
-    key: "64c8c685-e350-4359-a965-e908822b42e5",
+    key: '64c8c685-e350-4359-a965-e908822b42e5',
     debug: 3,
   }));
 
-  // Register join handler
+
+  // Joinボタン　
   joinTrigger.addEventListener('click', () => {
     // ピアがシグナリングサーバーに接続していることを確認する必要があることに注意してください
     // ピアインスタンスのメソッドを使用する前。
@@ -54,15 +50,15 @@ const Peer = window.Peer;
     }
 
     const room = peer.joinRoom(roomId.value, {
-      mode: getRoomModeByHash(),
+      mode: getRoomModeByHash(),//サーバにどう繋げるか
       stream: localStream,
     });
 
     room.once('open', () => {
-      messages.textContent += '=== You joined ===\n';
+      messages.textContent += '=== あなたが参加しました ===\n';
     });
     room.on('peerJoin', peerId => {
-      messages.textContent += `=== ${peerId} joined ===\n`;
+      messages.textContent += `=== ${peerId} さんが参加しました ===\n`;
     });
 
     // ルームで新しいピア参加のためにリモートストリームをレンダリングします
@@ -76,6 +72,7 @@ const Peer = window.Peer;
       await newVideo.play().catch(console.error);
     });
 
+//チャット))))))))))))
     room.on('data', ({ data, src }) => {
       // 部屋に送信されたメッセージと送信者を表示します
       messages.textContent += `${src}: ${data}\n`;
